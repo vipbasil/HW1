@@ -17,11 +17,6 @@ void Draw::addTriangle(std::vector<float> points, std::vector<float> color)
     QMatrix4x4 matrix;
     matrix.setToIdentity();
 
-    //matrix.scale(0.5f, 0.6f);
-    //matrix.translate(1, 1, 1);
-    //matrix.rotate(10.f,0, 0, 1);
-    //matrix.translate(-1, -1, -1);
-
     transformations.push_back(matrix);
     vertices.push_back(points);
 
@@ -105,60 +100,11 @@ void Draw::addCircle(std::vector<float> point, std::vector<float> color, int rad
 
 void Draw::addLine(std::vector<float> points, std::vector<float> color, float width){
 
-    float line_long = dist(points);
-    float alpha = angle(points);
-    std::vector<float> local_vertices;
-    local_vertices.resize(18);
-
-    //we prepare affine transformation matrix  RT
-    QMatrix4x4 matrix;
-    matrix.setToIdentity();
-    matrix.translate(points[0], points[1], points[2]);
-    matrix.rotate(alpha * 180 / M_PI, 0, 0, 1);
-
-    transformations.push_back(matrix);
-
-    //creating points for the first triangle
-    local_vertices[0] = 0;
-    local_vertices[1] = -width / 2.0f;
-    local_vertices[2] = 0.0f;
-
-    local_vertices[3] = line_long ;
-    local_vertices[4] = -width / 2.0f;
-    local_vertices[5] = 0.0f;
-
-    local_vertices[6] = 0.0f;
-    local_vertices[7] = width / 2.0f;
-    local_vertices[8] = 0.0f;
-
-    //creating points for the second triangle
-    local_vertices[9] = line_long;
-    local_vertices[10] = width / 2.0f;
-    local_vertices[11] = 0.0f;
-
-    local_vertices[12] = line_long;
-    local_vertices[13] = -width / 2.0f;
-    local_vertices[14] = 0.0f;
-
-    local_vertices[15] = 0.0f;
-    local_vertices[16] = width / 2.0f;
-    local_vertices[17] = 0.0f;
-
-    vertices.push_back(local_vertices);
-
-    //prepare colors array
-    std::vector<float> allcolor;
-    allcolor.resize(18);
-    unsigned int i = 0;
-    while (i < local_vertices.size()){
-        allcolor[i + 0] = color[0];
-        allcolor[i + 1] = color[1];
-        allcolor[i + 2] = color[2];
-
-        i += 3;
-    }
-    colors.push_back(allcolor);
-
+    // your code here for a line with different width
+    // Please use TRS matrix for transformations
+    // Points mus have 2 entries 3 elemaents each The begin point and the end point
+    //1. Draw a rectangle(2 triangles ) with given width and length
+    //2. Rotate the rectangle (matrix of rotation then translate it)
 }
 
 void Draw::deleteObject(int index)
